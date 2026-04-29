@@ -1,3 +1,7 @@
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class TreeIsomorphism {
     private final Graph graph;
 
@@ -30,7 +34,40 @@ public class TreeIsomorphism {
     }
 
     public int[] getCenters() {
-        throw new UnsupportedOperationException("TODO: encontrar o(s) centro(s) da arvore");
+        int n = graph.V();
+        if (n == 0) return new int[0];
+
+        int[] degree = new int[n];
+        List<Integer> leaves = new ArrayList<>();
+
+        // Inicial: graus e folhas
+        for (int i = 0; i < n; i++) {
+            degree[i] = graph.degree(i);
+            if (degree[i] <= 1) {
+                leaves.add(i);
+                degree[i] = 0;
+            }
+        }
+
+        int processedLeafs = leaves.size();
+
+        while (processedLeafs < n) {
+            List<Integer> newLeaves = new ArrayList<>();
+            for (int node : leaves) {  // Foreach limpo!
+                for (int neighbor : graph.adj(node)) {
+                    if (--degree[neighbor] == 1) {
+                        newLeaves.add(neighbor);
+                    }
+                }
+                degree[node] = 0;
+            }
+            processedLeafs += newLeaves.size();
+            leaves = newLeaves;
+        }
+
+        // leaves = centros
+        // return leaves.stream().mapToInt(Integer::intValue).toArray();
+        return leaves.stream().mapToInt(Integer::intValue).toArray();
     }
 
     public String getCanonicalEncoding() {
