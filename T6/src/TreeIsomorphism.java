@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TreeIsomorphism {
@@ -70,7 +71,28 @@ public class TreeIsomorphism {
         return leaves.stream().mapToInt(Integer::intValue).toArray();
     }
 
-    public String getCanonicalEncoding() {
-        throw new UnsupportedOperationException("TODO: gerar a codificacao canonica da arvore");
+    /*public String getCanonicalEncoding() {
+        if (!isTree()) {
+            throw new IllegalStateException("Apenas para árvores válidas");
+        }
+        int[] centers = getCenters();
+        if (centers.length == 0) return "()";  // Trivial
+        int root = centers[0];  // Enraiza no primeiro centro
+        return encode(root, -1);
+    }*/
+
+    public String getCanonicalEncoding(int node, int parent) {
+        List<String> labels = new ArrayList<>();
+        for (int child : graph.adj(node)) {
+            if (child != parent) {
+                labels.add(getCanonicalEncoding(child, node));
+            }
+        }
+        Collections.sort(labels);  // Lex ordem (Fiset)
+        StringBuilder sb = new StringBuilder("(");
+        for (String label : labels) {
+            sb.append(label);
+        }
+        return sb.append(")").toString();
     }
 }
