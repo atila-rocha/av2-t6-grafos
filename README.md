@@ -34,7 +34,7 @@ T6/
 
 ## Compilacao
 
-No diretorio `src`, execute:
+No diretorio `T6/src`, execute:
 
 ```bash
 javac Main.java TreeIsomorphism.java Graph.java Bag.java Stack.java In.java StdIn.java StdOut.java
@@ -53,4 +53,4 @@ java Main ../dados/invalid-ciclo3.txt ../dados/iso-path4-a.txt
 
 ## Video
 
-Link do video explicativo: PREENCHER
+Link do video explicativo: [Clique aqui](https://youtu.be/2OyHMDeNL-8)
