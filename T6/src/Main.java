@@ -8,7 +8,7 @@ public class Main {
 
         Graph tree1 = new Graph(new In(args[0]));
         Graph tree2 = new Graph(new In(args[1]));
-
+        // • PRINTS: Adj + valid + centros
         StdOut.println("Lista de adjacência da árvore 1:");
         StdOut.println(tree1);
         StdOut.println();
@@ -42,7 +42,7 @@ public class Main {
         StdOut.println("Código canônico Árvore 1: " + code1);
         StdOut.println();
 
-        // Testa centros de tree2 vs code1
+        // • LOOP: Testa centros tree2 vs code1 (máx 2 extras)
         boolean isomorfas = false;
         for (int center : centers2) {
             String code2 = analysis2.getCanonicalEncoding(center, -1);
